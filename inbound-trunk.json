@@ -1,0 +1,7 @@
+{
+  "trunk": {
+    "id": "ST_ENU5kgkgLc7R",
+    "name": "Inbound Twilio Trunk",
+    "numbers": ["+19346472589"]
+  }
+}

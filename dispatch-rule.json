@@ -1,0 +1,15 @@
+{
+  "name": "Route calls to agent",
+  "rule": {
+    "dispatchRuleIndividual": {
+      "roomPrefix": "call"
+    }
+  },
+  "room_config": {
+    "agents": [
+      {
+        "agent_name": "inbound-agent"
+      }
+    ]
+  }
+}
