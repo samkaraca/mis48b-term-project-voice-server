@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from livekit import agents
 from livekit.agents import Agent, AgentSession, RoomInputOptions, mcp
-from livekit.plugins import openai, cartesia, silero, deepgram  # import plugin modules
+from livekit.plugins import openai, cartesia, silero, deepgram, elevenlabs  # import plugin modules
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 from livekit.rtc.room import ConnectionState, RemoteParticipant
 import asyncio
@@ -80,10 +80,9 @@ def extract_caller_number(ctx: agents.JobContext):
     parts = room_name.split('_')
     if len(parts) >= 3:
         phone_number = parts[1]
-        print("Extracted caller number: ", phone_number)
         return phone_number
     else:
-        return None
+        return "+111111111111"
 
 # The main entrypoint for the agent job
 async def entrypoint(ctx: agents.JobContext):
@@ -108,7 +107,7 @@ async def entrypoint(ctx: agents.JobContext):
         # Language Model: using OpenAI GPT-4 (requires OPENAI_API_KEY)
         llm = openai.LLM(model="gpt-4.1-mini"),
         # Text-to-Speech: using Cartesia TTS with default English voice
-        tts = cartesia.TTS(language="tr", voice="bb2347fe-69e9-4810-873f-ffd759fe8420"),
+        tts = elevenlabs.TTS(language="tr", model="eleven_flash_v2_5"),
         # (Optional: you could add voice activity detection or noise cancellation here)
         vad=silero.VAD.load(),
         turn_detection=MultilingualModel(),
@@ -133,7 +132,16 @@ async def entrypoint(ctx: agents.JobContext):
 
     @room.on("participant_disconnected")
     def on_participant_disconnected(_: RemoteParticipant):
-        print("Participant disconnected")
+        async def handle_disconnected():
+            conversation = "\n".join(
+                map(lambda item: f"{'kullanıcı' if item.role == 'user' else 'asistan'}: {item.content[0]}", session.history.items)
+            )
+            await mcp_tool_caller.call_tool(
+                "send-summary-to-user",
+                {"conversationText": conversation, "callerNumber": extract_caller_number(ctx)}
+            )
+            print("Participant disconnected")
+        asyncio.create_task(handle_disconnected())
 
 # Run the agent application (in development mode by default)
 if __name__ == "__main__":

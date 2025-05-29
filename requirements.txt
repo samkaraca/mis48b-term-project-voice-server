@@ -1,4 +1,4 @@
 mcp~=1.9.1
-livekit-agents[deepgram,openai,cartesia,silero,turn-detector,mcp]~=1.0
+livekit-agents[deepgram,openai,cartesia,silero,turn-detector,mcp,elevenlabs]~=1.0
 livekit-plugins-noise-cancellation~=0.2
 python-dotenv
