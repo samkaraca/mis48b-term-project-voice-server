@@ -1,6 +1,6 @@
 # Voice Server Agent
 
-This project implements a voice agent for LiveKit, integrating speech-to-text (STT), large language model (LLM), and text-to-speech (TTS) services, with custom instructions fetched from an MCP server. The agent is designed to join LiveKit rooms, process audio, and interact with callers in real time.
+This project implements a voice agent for LiveKit, integrating speech-to-text (STT), large language model (LLM), and text-to-speech (TTS) services, with custom instructions fetched from an MCP server. **Note:** This repository does not include the MCP server; it is designed to connect to a third-party MCP server, which is maintained in a separate repository.
 
 ## Features
 
@@ -21,7 +21,10 @@ This project implements a voice agent for LiveKit, integrating speech-to-text (S
   - Deepgram API
   - OpenAI API
   - ElevenLabs API
-  - MCP server (custom)
+  - MCP server (custom, not included; see below)
+
+> **MCP Server:**
+> This repository does **not** include the MCP server implementation. You must deploy or have access to a compatible MCP server. The MCP server codebase is maintained separately. Please refer to the relevant MCP server repository for setup and deployment instructions.
 
 ---
 
@@ -31,7 +34,7 @@ This project implements a voice agent for LiveKit, integrating speech-to-text (S
 
    ```bash
    git clone https://github.com/samkaraca/mis48b-term-project-voice-server
-   cd voice-server
+   cd mis48b-term-project-voice-server
    ```
 
 2. **Create a virtual environment (recommended):**
@@ -61,7 +64,7 @@ This project implements a voice agent for LiveKit, integrating speech-to-text (S
    LIVEKIT_URL=wss://your-livekit-server-url
    DEEPGRAM_API_KEY=your_deepgram_api_key
    OPENAI_API_KEY=your_openai_api_key
-   ELEVENLABS_API_KEY=your_elevenlabs_api_key
+   ELEVEN_API_KEY=your_elevenlabs_api_key
    MCP_SERVER_URL=https://your-mcp-server-url
    ```
 
