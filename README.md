@@ -54,6 +54,8 @@ This project implements a voice agent for LiveKit, integrating speech-to-text (S
 
 ## Configuration
 
+All environment variables listed below are **mandatory**. You must also run the MCP server (from a separate repository) and provide its URL in this project's `.env` file.
+
 1. **Create a `.env` file in the project root:**
 
    Example:
@@ -68,7 +70,8 @@ This project implements a voice agent for LiveKit, integrating speech-to-text (S
    MCP_SERVER_URL=https://your-mcp-server-url
    ```
 
-   - Replace the values with your actual credentials and endpoints.
+   - **All variables above are required for the application to run.**
+   - You must deploy or have access to a compatible MCP server (see Prerequisites above) and set its URL in `MCP_SERVER_URL`.
 
 ---
 
