@@ -72,9 +72,6 @@ class Assistant(Agent):
         # Initialize the agent with our instructions
         super().__init__(instructions="")
 
-user_phone_number = "+905535235961"
-user_name = "Hikmet Sami Karaca"
-
 def extract_caller_number(ctx: agents.JobContext):
     room_name = ctx.room.name  # e.g., "call_+905535235961_mMAhVe4E6hTs"
     parts = room_name.split('_')
